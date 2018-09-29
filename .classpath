@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PTIGNCJPA"/>
+	<classpathentry kind="lib" path="C:/Java/wildfly/bin/client/jboss-client.jar" sourcepath="C:/Users/Seba/.m2/repository/org/wildfly/wildfly-client-all/10.1.0.Final/wildfly-client-all-10.1.0.Final-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Java/wildfly/modules/system/layers/base/org/hibernate/main/hibernate-core-5.0.10.Final.jar" sourcepath="C:/Users/Seba/.m2/repository/org/hibernate/hibernate-core/5.0.10.Final/hibernate-core-5.0.10.Final-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Java/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="lib/jdatepicker-1.3.2.jar" sourcepath="C:/Users/Seba/.m2/repository/net/sourceforge/jdatepicker/jdatepicker/1.3.2/jdatepicker-1.3.2-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
