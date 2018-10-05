@@ -131,7 +131,7 @@ public class GNCLogin extends JInternalFrame {
 				GNCPrincipal.recargar();
 				this.dispose();
 			}else{
-				JOptionPane.showInternalMessageDialog(this, "El Usuario o Contraseña no validos",
+				JOptionPane.showInternalMessageDialog(this, "El Usuario o Contraseï¿½a no validos",
 						"Error Usuario!", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
