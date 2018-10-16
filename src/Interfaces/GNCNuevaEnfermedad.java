@@ -155,7 +155,7 @@ public class GNCNuevaEnfermedad extends JInternalFrame {
             }
         }
 		
-		// Si alguno es vacÌo, mostramos una ventana de mensaje
+		// Si alguno es vac√≠o, mostramos una ventana de mensaje
 		if (gGravedad.equals("") || enfermedad.equals("") ) {
 			JOptionPane.showInternalMessageDialog(this, "Debe completar todos los datos solicitados.", "Datos incompletos!",
 					JOptionPane.WARNING_MESSAGE);
@@ -181,14 +181,14 @@ public class GNCNuevaEnfermedad extends JInternalFrame {
 			}
 			
 			if (almacenado) {
-				JOptionPane.showInternalMessageDialog(this, "la  Enfermedad se ha sido registrado con Èxito.",
+				JOptionPane.showInternalMessageDialog(this, "la  Enfermedad se ha sido registrado con √âxito.",
 						"Enfermedad Registrada!", JOptionPane.INFORMATION_MESSAGE);
 				
 				// cerramos la ventanta
 				this.dispose();
 			}
 			else{
-				JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente m·s tarde",
+				JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente m√°s tarde",
 						"Error al registrar!", JOptionPane.ERROR_MESSAGE);
 			}
 		}

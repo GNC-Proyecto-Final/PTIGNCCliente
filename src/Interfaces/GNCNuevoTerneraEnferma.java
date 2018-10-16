@@ -199,7 +199,7 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
         	formBuscarEnfermedad.toFront();
     	}
     	else{
-    		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "¡Formulario ya esta abierto!", "Aviso: Buscar Enfermedades", JOptionPane.INFORMATION_MESSAGE);
+    		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "Â¡Formulario ya esta abierto!", "Aviso: Buscar Enfermedades", JOptionPane.INFORMATION_MESSAGE);
     	}
 	}
 	public void cargarFormBuscarTernera(){
@@ -211,7 +211,7 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
         	formBuscarTernera.toFront();
     	}
     	else{
-    		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "¡Formulario ya esta abierto!", "Aviso: Buscar Terneras", JOptionPane.INFORMATION_MESSAGE);
+    		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "Â¡Formulario ya esta abierto!", "Aviso: Buscar Terneras", JOptionPane.INFORMATION_MESSAGE);
     	}
 	}
 
@@ -309,7 +309,7 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
 						return;
 				}
 				
-				// Si alguno es vacío, mostramos una ventana de mensaje
+				// Si alguno es vacio, mostramos una ventana de mensaje
 				if (terneraString.equals("") || enfermedadString.equals("")||  dateInicio == null ) {
 					JOptionPane.showInternalMessageDialog(this, "Debe completar los campos \n(Ternera, Enfermedad, Fecha Inicio.", "Datos incompletos!",
 							JOptionPane.WARNING_MESSAGE);
@@ -323,8 +323,7 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
 							InitialContext.doLookup("PTIGNCJPA/EnfermedadBean!Controlador.EnfermedadBeanRemote");
 
 					Enfermedad enfermedad = controladorEnfermedad.obtenerEnfermedadPorId(idEnfermedad);
-					System.out.println("La vicha es: " +enfermedad.getIdEnfermedad()+ " - "+enfermedad.getGradoGravedad() + " - "+ enfermedad.getNombre().getNombre());
-								
+									
 					EnfermedadTerneraBeanRemote controladorTerneraEnfermedad = (EnfermedadTerneraBeanRemote)
 								InitialContext.doLookup("PTIGNCJPA/EnfermedadTerneraBean!Controlador.EnfermedadTerneraBeanRemote");
 					
@@ -353,14 +352,14 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
 						}
 						
 						if (almacenado) {
-							JOptionPane.showInternalMessageDialog(this, "la  Enfermedad por Ternera se ha sido registrado con éxito.",
+							JOptionPane.showInternalMessageDialog(this, "la  Enfermedad por Ternera se ha sido registrado con Exito.",
 									"Enfermedad Registrada!", JOptionPane.INFORMATION_MESSAGE);
 							
 							// cerramos la ventanta
 							this.dispose();
 						}
 						else{
-							JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente más tarde",
+							JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente mas tarde",
 									"Error al registrar!", JOptionPane.ERROR_MESSAGE);
 						}
 					}
@@ -389,13 +388,13 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
 						}
 						
 						if (almacenado) {
-							JOptionPane.showInternalMessageDialog(this, "la  Enfermedad por Ternera se ha sido registrado con éxito.",
+							JOptionPane.showInternalMessageDialog(this, "la  Enfermedad por Ternera se ha sido registrado con Exito.",
 									"Enfermedad Registrada!", JOptionPane.INFORMATION_MESSAGE);				
 							// cerramos la ventanta
 							this.dispose();
 						}
 						else{
-							JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente más tarde",
+							JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente mas tarde",
 									"Error al registrar!", JOptionPane.ERROR_MESSAGE);
 						}
 					}
