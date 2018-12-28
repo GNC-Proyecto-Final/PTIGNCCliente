@@ -24,6 +24,8 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import Controlador.TernerasBeanRemote;
 import entidades.Ternera;
+import excepciones.TerneraException;
+
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -47,8 +49,9 @@ public class GNCBuscarTerneraEditar extends JInternalFrame  {
 	private static GNCTernerasEnfermas  formTerneraEnferma;
 	/**
 	 * Create the frame.
+	 * @throws TerneraException 
 	 */
-	public GNCBuscarTerneraEditar() {
+	public GNCBuscarTerneraEditar() throws TerneraException {
 		setBounds(100, 100, 450, 300);
 		setTitle("Terneras");
 		
@@ -144,15 +147,15 @@ public class GNCBuscarTerneraEditar extends JInternalFrame  {
 		
 	}
 	
-	public void recargarPanel(){
-		//Cargo tabla de nuevo (para que se tomen los cambios de la edición)
+	public void recargarPanel() throws TerneraException{
+		//Cargo tabla de nuevo (para que se tomen los cambios de la ediciï¿½n)
 		cargarTabla();
 		this.revalidate();
 		this.repaint();
 	}
 	
 	
-	public void cargarTabla(){
+	public void cargarTabla() throws TerneraException{
 		//Nombre de las columnas de la tabla
         String[] columnas = new String[] { "Id", "Nro Caravana", "Fecha Alta"};
             
@@ -160,7 +163,7 @@ public class GNCBuscarTerneraEditar extends JInternalFrame  {
         List<Ternera> terneras= controladorTernera.obtenerTodasTerneras();
 
         /*Los datos de una tabla se pueden ver como una matriz o un doble array de objetos 
-         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genérico)*/
+         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genï¿½rico)*/
         Object[][] datosTabla = new Object[terneras.size()][3];
         int fila = 0;
         for(Ternera t : terneras){

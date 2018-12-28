@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 import Controlador.EnfermedadBeanRemote;
 import Controlador.EnfermedadTerneraBeanRemote;
 import excepciones.GNCException;
+import excepciones.TerneraEnfermaException;
 import entidades.Enfermedad;
 
 
@@ -40,8 +41,9 @@ public class GNCEliminarEnfermedad extends JInternalFrame {
     JLabel lblnombreGradoGravedad ,lblNombreEnfermedad;
 	/**
 	 * Create the frame.
+	 * @throws TerneraEnfermaException 
 	 */
-	public GNCEliminarEnfermedad(long enfermedadId) {
+	public GNCEliminarEnfermedad(long enfermedadId) throws TerneraEnfermaException {
 		
 		idEnfermedad = enfermedadId;
 		getContentPane().setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -112,20 +114,30 @@ public class GNCEliminarEnfermedad extends JInternalFrame {
 		btnAceptar.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent event) {   
-	        	accionEliminar();       	
+	        	try {
+					accionEliminar();
+				} catch (TerneraEnfermaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}       	
 	        }
 	    });
 		
 		btnCancelar.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent event) {   
-	        	accionCancelar();
+	        	try {
+					accionCancelar();
+				} catch (TerneraEnfermaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	        }
 	    });
 	}
 	//Carga los datos de la base de datos al formulario
-	public void cargarDatosDeLaBD(Long idEnfermedad){
-		//Obtengo la materia de id el que me pasan por parámetro en el constructor
+	public void cargarDatosDeLaBD(Long idEnfermedad) throws TerneraEnfermaException{
+		//Obtengo la materia de id el que me pasan por parï¿½metro en el constructor
 		enferm = controladorEnfermedad.obtenerEnfermedadPorId(idEnfermedad);
 		lblIdEnfermedad.setText(String.valueOf(enferm.getIdEnfermedad()));
 		lblNombreEnfermedad.setText(enferm.getNombre().getNombre());
@@ -139,12 +151,12 @@ public class GNCEliminarEnfermedad extends JInternalFrame {
 		InitialContext.doLookup("PTIGNCJPA/EnfermedadTerneraBean!Controlador.EnfermedadTerneraBeanRemote");
 	}
 	
-	private void accionCancelar() {
+	private void accionCancelar() throws TerneraEnfermaException {
 		// si se cancela, se eliminar la ventana
 		ventana();
 		this.dispose();
 	}
-	private void accionEliminar() {
+	private void accionEliminar() throws TerneraEnfermaException {
 		// Si es ingresar se validan datos!
 			boolean existe = controladorTernerasEnfermas.existeEnfermedadEnTernaraEnfermedad(enferm.getIdEnfermedad());
 			if(existe){
@@ -162,7 +174,7 @@ public class GNCEliminarEnfermedad extends JInternalFrame {
 					e.printStackTrace();
 				}
 				if (eliminado) {
-					JOptionPane.showInternalMessageDialog(this, "la  Enfermedad se ha sido Eliminado con éxito.",
+					JOptionPane.showInternalMessageDialog(this, "la  Enfermedad se ha sido Eliminado con ï¿½xito.",
 							"Enfermedad Elimada!", JOptionPane.INFORMATION_MESSAGE);
 					
 					// cerramos la ventanta
@@ -171,12 +183,12 @@ public class GNCEliminarEnfermedad extends JInternalFrame {
 					this.dispose();
 				}
 				else{
-					JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente más tarde",
+					JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente mï¿½s tarde",
 							"Error al registrar!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 	}
-	public void ventana(){
+	public void ventana() throws TerneraEnfermaException{
     	if(formEnfermedades == null || formEnfermedades.isClosed()){
     		try {
 				formEnfermedades = new GNCEnfermedades();
@@ -190,7 +202,7 @@ public class GNCEliminarEnfermedad extends JInternalFrame {
         	formEnfermedades.toFront();
     	}
     	else{
-    		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "¡Formulario ya esta abierto!", "Aviso: Enfermedades", JOptionPane.INFORMATION_MESSAGE);
+    		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Enfermedades", JOptionPane.INFORMATION_MESSAGE);
     	}  
 	}
 }

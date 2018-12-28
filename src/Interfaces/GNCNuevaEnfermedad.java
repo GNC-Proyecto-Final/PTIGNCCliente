@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import Controlador.EnfermedadBeanRemote;
 import enumerados.NombreEnfermedad;
 import excepciones.GNCException;
+import excepciones.TerneraEnfermaException;
 import entidades.Enfermedad;
 
 import javax.swing.JComboBox;
@@ -94,7 +95,12 @@ public class GNCNuevaEnfermedad extends JInternalFrame {
 		btnAceptar.addActionListener(new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent event) {   
-	        	accionGuardar();
+	        	try {
+					accionGuardar();
+				} catch (TerneraEnfermaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	        	
 	        }
 	    });
@@ -142,7 +148,7 @@ public class GNCNuevaEnfermedad extends JInternalFrame {
 		// si se cancela, se eliminar la ventana
 		this.dispose();
 	}
-	private void accionGuardar() {
+	private void accionGuardar() throws TerneraEnfermaException {
 		// Si es ingresar se validan datos!
 		String gGravedad = (String) this.cmbGravedad.getSelectedItem();
 		String enfermedad = (String) this.cmbEnfermedad.getSelectedItem();

@@ -35,6 +35,9 @@ import Controlador.EnfermedadTerneraBeanRemote;
 import entidades.Enfermedad;
 import entidades.EnfermedadTernera;
 import enumerados.NombreEnfermedad;
+import excepciones.TerneraEnfermaException;
+import excepciones.TerneraException;
+
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -59,8 +62,9 @@ public class GNCTernerasEnfermas extends JInternalFrame {
 	private static GNCEditarTerneraEnferma editarTerneraEnferma;
 	/**
 	 * Create the frame.
+	 * @throws TerneraEnfermaException 
 	 */
-	public GNCTernerasEnfermas() {
+	public GNCTernerasEnfermas() throws TerneraEnfermaException {
 		setBounds(100, 100, 519, 300);
 		setTitle("Enfermedades");
 		
@@ -139,14 +143,19 @@ public class GNCTernerasEnfermas extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				if(formBuscarTerneraEditar == null || formBuscarTerneraEditar.isClosed()){
-					formBuscarTerneraEditar = new GNCBuscarTerneraEditar();
+					try {
+						formBuscarTerneraEditar = new GNCBuscarTerneraEditar();
+					} catch (TerneraException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					formBuscarTerneraEditar.setVisible(true);
 		    		GNCPrincipal.escritorio.add(formBuscarTerneraEditar);
 		    		GNCPrincipal.centrarVentana(formBuscarTerneraEditar);
 		    		formBuscarTerneraEditar.toFront();
 		    	}
 		    	else{
-		    		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "¡Formulario ya esta abierto!", "Aviso: Buscar Enfermedades", JOptionPane.INFORMATION_MESSAGE);
+		    		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Buscar Enfermedades", JOptionPane.INFORMATION_MESSAGE);
 		    	}
 			}
 		});
@@ -178,6 +187,9 @@ public class GNCTernerasEnfermas extends JInternalFrame {
 						} catch (NamingException e) {
 
 							e.printStackTrace();
+						} catch (TerneraEnfermaException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 		        		editarTerneraEnferma.setVisible(true);
 		        		GNCPrincipal.escritorio.add(editarTerneraEnferma);
@@ -187,7 +199,7 @@ public class GNCTernerasEnfermas extends JInternalFrame {
 		            	dispose();
 	            	}
 	            	else{
-	            		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "¡Formulario ya esta abierto!", "Aviso: Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
+	            		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
 	            	}        
 		        }
 			}
@@ -201,14 +213,14 @@ public class GNCTernerasEnfermas extends JInternalFrame {
         });
 	}
 	
-	public void recargarPanel(){
-		//Cargo tabla de nuevo (para que se tomen los cambios de la edición)
+	public void recargarPanel() throws TerneraEnfermaException{
+		//Cargo tabla de nuevo (para que se tomen los cambios de la ediciï¿½n)
 		cargarTabla();
 		this.revalidate();
 		this.repaint();
 	}
 	
-	public void cargarTabla(){
+	public void cargarTabla() throws TerneraEnfermaException{
 		//Nombre de las columnas de la tabla
         String[] columnas = new String[] { "IdTernera","Nro Caravana" ,"IdEnfermedad","Enfermedad", "Fecha Inicio", "Fecha Fin","Notas"};
             
@@ -216,7 +228,7 @@ public class GNCTernerasEnfermas extends JInternalFrame {
         List<EnfermedadTernera> ternerasEnfermas= controladorTerneraEnfermedad.obtenerTodasEnfermedadesTerneras();
 
         /*Los datos de una tabla se pueden ver como una matriz o un doble array de objetos 
-         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genérico)*/
+         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genï¿½rico)*/
         Object[][] datosTabla = new Object[ternerasEnfermas.size()][7];
         int fila = 0;
         

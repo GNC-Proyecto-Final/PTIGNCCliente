@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import excepciones.GNCException;
+import excepciones.TerneraEnfermaException;
+import excepciones.TerneraException;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -105,6 +107,9 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
 				} catch (NamingException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (TerneraEnfermaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		});
@@ -129,7 +134,12 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
 		btnTernera.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnTernera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cargarFormBuscarTernera();
+				try {
+					cargarFormBuscarTernera();
+				} catch (TerneraException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
@@ -137,7 +147,12 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
 		btnEnfermedad.setBounds(300, 48, 89, 23);
 		btnEnfermedad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cargarFormBuscarEnfermedad();
+				try {
+					cargarFormBuscarEnfermedad();
+				} catch (TerneraEnfermaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnEnfermedad.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -190,7 +205,7 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
 	}
 	
 	
-	public void cargarFormBuscarEnfermedad(){
+	public void cargarFormBuscarEnfermedad() throws TerneraEnfermaException{
     	if(formBuscarEnfermedad == null || formBuscarEnfermedad.isClosed()){
     		formBuscarEnfermedad = new GNCBuscarEnfermedad();
     		formBuscarEnfermedad.setVisible(true);
@@ -202,7 +217,7 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
     		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "¡Formulario ya esta abierto!", "Aviso: Buscar Enfermedades", JOptionPane.INFORMATION_MESSAGE);
     	}
 	}
-	public void cargarFormBuscarTernera(){
+	public void cargarFormBuscarTernera() throws TerneraException{
     	if(formBuscarTernera == null || formBuscarTernera.isClosed()){
     		formBuscarTernera = new GNCBuscarTernera();
     		formBuscarTernera.setVisible(true);
@@ -280,7 +295,7 @@ public class GNCNuevoTerneraEnferma extends JInternalFrame {
 			return fechaValida;
 		
 	}
-	private void accionGuardar() throws NamingException{
+	private void accionGuardar() throws NamingException, TerneraEnfermaException{
 		// Si es ingresar se validan datos!
 				String terneraString =  GNCNuevoTerneraEnferma.txtTernera.getText();
 				String enfermedadString = GNCNuevoTerneraEnferma.txtEnfermedad.getText();

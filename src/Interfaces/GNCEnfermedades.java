@@ -23,6 +23,7 @@ import javax.swing.table.TableRowSorter;
 
 import Controlador.EnfermedadBeanRemote;
 import enumerados.NombreEnfermedad;
+import excepciones.TerneraEnfermaException;
 import entidades.Enfermedad;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -50,8 +51,9 @@ public class GNCEnfermedades extends JInternalFrame     {
 	/**
 	 * Create the frame.
 	 * @throws NamingException 
+	 * @throws TerneraEnfermaException 
 	 */
-	public GNCEnfermedades() throws NamingException {
+	public GNCEnfermedades() throws NamingException, TerneraEnfermaException {
 		setBounds(100, 100, 450, 300);
 		setTitle("Enfermedades");
 		
@@ -126,21 +128,26 @@ public class GNCEnfermedades extends JInternalFrame     {
         });
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				eliminar();
+				try {
+					eliminar();
+				} catch (TerneraEnfermaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
 	}
 	
-	public void recargarPanel(){
-		//Cargo tabla de nuevo (para que se tomen los cambios de la edición)
+	public void recargarPanel() throws TerneraEnfermaException{
+		//Cargo tabla de nuevo (para que se tomen los cambios de la ediciï¿½n)
 		cargarTabla();
 		this.revalidate();
 		this.repaint();
 	}
 	
 	
-	public void cargarTabla(){
+	public void cargarTabla() throws TerneraEnfermaException{
 		//Nombre de las columnas de la tabla
         String[] columnas = new String[] { "Id", "Nombre", "Grado Gravedad"};
             
@@ -148,7 +155,7 @@ public class GNCEnfermedades extends JInternalFrame     {
         List<Enfermedad> enfermedades= controladorEnfermedad.obtenerTodasEnfermedades();
 
         /*Los datos de una tabla se pueden ver como una matriz o un doble array de objetos 
-         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genérico)*/
+         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genï¿½rico)*/
         Object[][] datosTabla = new Object[enfermedades.size()][3];
         int fila = 0;
         for(Enfermedad e : enfermedades){
@@ -295,16 +302,16 @@ public class GNCEnfermedades extends JInternalFrame     {
 		this.cmbEnfermedad.setSelectedItem("Todos");
 		this.cmbGravedad.setSelectedItem("Todos");
 	}
-	public void eliminar(){
+	public void eliminar() throws TerneraEnfermaException{
 		eliminoEnfermedad();
   		  
 	    		
 	}
-	public void eliminoEnfermedad(){
+	public void eliminoEnfermedad() throws TerneraEnfermaException{
 		
 		
 		if(table.getSelectedRow()==-1)	{
-			 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "¡Debe Seleccionar una Enfermedad!", "Eliminar Enfermedad", JOptionPane.NO_OPTION);
+			 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "ï¿½Debe Seleccionar una Enfermedad!", "Eliminar Enfermedad", JOptionPane.NO_OPTION);
 	    	   return;
 		}else{
 			int filasele = table.getSelectedRow();
@@ -319,7 +326,7 @@ public class GNCEnfermedades extends JInternalFrame     {
             	dispose();
         	}
         	else{
-        		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "¡Formulario ya esta abierto!", "Aviso: Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
+        		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
         	}     
 		}
 

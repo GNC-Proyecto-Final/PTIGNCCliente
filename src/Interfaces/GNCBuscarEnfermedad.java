@@ -30,6 +30,7 @@ import javax.swing.table.TableRowSorter;
 import Controlador.EnfermedadBeanRemote;
 import entidades.Enfermedad;
 import enumerados.NombreEnfermedad;
+import excepciones.TerneraEnfermaException;
 
 
 
@@ -52,8 +53,9 @@ public class GNCBuscarEnfermedad extends JInternalFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws TerneraEnfermaException 
 	 */
-	public GNCBuscarEnfermedad() {
+	public GNCBuscarEnfermedad() throws TerneraEnfermaException {
 		setBounds(100, 100, 450, 300);
 		setTitle("Enfermedades");
 		
@@ -149,15 +151,15 @@ public class GNCBuscarEnfermedad extends JInternalFrame {
 		
 	}
 	
-	public void recargarPanel(){
-		//Cargo tabla de nuevo (para que se tomen los cambios de la edición)
+	public void recargarPanel() throws TerneraEnfermaException{
+		//Cargo tabla de nuevo (para que se tomen los cambios de la ediciï¿½n)
 		cargarTabla();
 		this.revalidate();
 		this.repaint();
 	}
 	
 	
-	public void cargarTabla(){
+	public void cargarTabla() throws TerneraEnfermaException{
 		//Nombre de las columnas de la tabla
         String[] columnas = new String[] { "Id", "Nombre", "Grado Gravedad"};
             
@@ -165,7 +167,7 @@ public class GNCBuscarEnfermedad extends JInternalFrame {
         List<Enfermedad> enfermedades= controladorEnfermedad.obtenerTodasEnfermedades();
 
         /*Los datos de una tabla se pueden ver como una matriz o un doble array de objetos 
-         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genérico)*/
+         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genï¿½rico)*/
         Object[][] datosTabla = new Object[enfermedades.size()][3];
         int fila = 0;
         for(Enfermedad e : enfermedades){

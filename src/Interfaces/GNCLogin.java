@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import Controlador.UsuariosBeanRemote;
+import excepciones.UsuarioException;
 
 public class GNCLogin extends JInternalFrame {
 	/**
@@ -94,6 +95,9 @@ public class GNCLogin extends JInternalFrame {
 				} catch (NamingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (UsuarioException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
             }
 
@@ -113,7 +117,7 @@ public class GNCLogin extends JInternalFrame {
 		this.dispose();
 				
 	}
-	private void accionIngresar() throws NamingException {
+	private void accionIngresar() throws NamingException, UsuarioException {
 		UsuariosBeanRemote controladorUsuario= (UsuariosBeanRemote)
 				InitialContext.doLookup("PTIGNCJPA/UsuariosBean!Controlador.UsuariosBeanRemote");
 		String user =  txtUser.getText();

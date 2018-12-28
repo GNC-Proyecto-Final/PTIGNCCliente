@@ -25,6 +25,7 @@ import entidades.EnfermedadTernera;
 import entidades.EnfermedadTerneraPK;
 import entidades.Ternera;
 import excepciones.GNCException;
+import excepciones.TerneraEnfermaException;
 
 //import org.eclipse.wb.swing.FocusTraversalOnArray;
 
@@ -68,8 +69,9 @@ public class GNCEditarTerneraEnferma extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 * @throws NamingException 
+	 * @throws TerneraEnfermaException 
 	 */
-	public GNCEditarTerneraEnferma(long idTernera,long idEnfermedad,String date) throws NamingException {
+	public GNCEditarTerneraEnferma(long idTernera,long idEnfermedad,String date) throws NamingException, TerneraEnfermaException {
 				
 		idter = idTernera;
 		idEnf = idEnfermedad;
@@ -122,7 +124,12 @@ public class GNCEditarTerneraEnferma extends JInternalFrame {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				formatoFecha();	
-				accionGuardar();
+				try {
+					accionGuardar();
+				} catch (TerneraEnfermaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnAceptar.setBounds(334, 211, 90, 20);
@@ -173,7 +180,7 @@ public class GNCEditarTerneraEnferma extends JInternalFrame {
 	}
 
 	//Genera el JDatePicker para elegir la fecha fin
-	private JDatePickerImpl creareDatePickerFin() throws NamingException {
+	private JDatePickerImpl creareDatePickerFin() throws NamingException, TerneraEnfermaException {
 		controladorTernera = (TernerasBeanRemote)
 				InitialContext.doLookup("PTIGNCJPA/TernerasBean!Controlador.TernerasBeanRemote");
 		ternera = controladorTernera.obtenerTerneraPorId(idter);
@@ -209,8 +216,8 @@ public class GNCEditarTerneraEnferma extends JInternalFrame {
 		// si se cancela, se eliminar la ventana
 		this.dispose();
 	}
-	public void cargarDatosDeLaBD() throws NamingException{
-		//Obtengo la materia de id el que me pasan por parámetro en el constructor
+	public void cargarDatosDeLaBD() throws NamingException, TerneraEnfermaException{
+		//Obtengo la materia de id el que me pasan por parï¿½metro en el constructor
 		//Se carga el controlador remoto de ternera
 		controladorTernera = (TernerasBeanRemote)
 				InitialContext.doLookup("PTIGNCJPA/TernerasBean!Controlador.TernerasBeanRemote");
@@ -286,7 +293,7 @@ public class GNCEditarTerneraEnferma extends JInternalFrame {
 		return fechaValida;
 		
 	}
-	private void accionGuardar(){
+	private void accionGuardar() throws TerneraEnfermaException{
 		formatoFecha();
 		String aspectSan = aspectSanitarios.getText();
 		if( !validarFecha()){
@@ -316,7 +323,7 @@ public class GNCEditarTerneraEnferma extends JInternalFrame {
 		}
 		
 		if (almacenado) {
-			JOptionPane.showInternalMessageDialog(this, "la  Enfermedad por Ternera se ha sido registrado con éxito.",
+			JOptionPane.showInternalMessageDialog(this, "la  Enfermedad por Ternera se ha sido registrado con ï¿½xito.",
 					"Enfermedad Editada!", JOptionPane.INFORMATION_MESSAGE);
 			
 			// cerramos la ventanta
@@ -329,13 +336,13 @@ public class GNCEditarTerneraEnferma extends JInternalFrame {
             	formTernerasEnfermas.toFront();
         	}
         	else{
-        		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "¡Formulario ya esta abierto!", "Aviso: Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
+        		 JOptionPane.showInternalMessageDialog(GNCPrincipal.escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
         	}     
 			
 			this.dispose();
 		}
 		else{
-			JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente más tarde",
+			JOptionPane.showInternalMessageDialog(this, "Hubo un error al almacenar. Intente nuevamente mï¿½s tarde",
 					"Error al editar!", JOptionPane.ERROR_MESSAGE);
 		}
 	}

@@ -24,6 +24,7 @@ import javax.swing.table.TableRowSorter;
 
 import Controlador.EnfermedadTerneraBeanRemote;
 import entidades.EnfermedadTernera;
+import excepciones.TerneraEnfermaException;
 
 public class GNCInformeDeTernerasEnfermas extends JInternalFrame {
 
@@ -34,7 +35,7 @@ public class GNCInformeDeTernerasEnfermas extends JInternalFrame {
 		private static GNCBuscarTerneraEditar formBuscarTerneraEditar;
 		private static GNCEditarTerneraEnferma editarTerneraEnferma;
 		
-		public GNCInformeDeTernerasEnfermas() {
+		public GNCInformeDeTernerasEnfermas() throws TerneraEnfermaException {
 			setBounds(100, 100, 514, 300);
 			setTitle("Enfermedades");
 			
@@ -71,17 +72,17 @@ public class GNCInformeDeTernerasEnfermas extends JInternalFrame {
 
 		}
 		
-		public void recargarPanel(){
-			//Cargo tabla de nuevo (para que se tomen los cambios de la edición)
+		public void recargarPanel() throws TerneraEnfermaException{
+			//Cargo tabla de nuevo (para que se tomen los cambios de la ediciï¿½n)
 			cargarTabla();
 			this.revalidate();
 			this.repaint();
 		}
 		
 		
-		public void cargarTabla(){
+		public void cargarTabla() throws TerneraEnfermaException{
 			//Nombre de las columnas de la tabla
-	        String[] columnas = new String[] { "IdTer","Enfermedad","FechaNac", "FechaIniEnf", "FechaFinEnf","Enfermo a días"};
+	        String[] columnas = new String[] { "IdTer","Enfermedad","FechaNac", "FechaIniEnf", "FechaFinEnf","Enfermo a dï¿½as"};
 	            
 	      //Se obtienen las Enfermedades para llenar la tabla
 	        List<EnfermedadTernera> ternerasEnfermas= controladorTerneraEnfermedad.obtenerInformeTodasEnfermedadesTerneras();
@@ -89,7 +90,7 @@ public class GNCInformeDeTernerasEnfermas extends JInternalFrame {
 	       //Collections.sort(ternerasEnfermas,EnfermedadTernera.comparar);
 
 	        /*Los datos de una tabla se pueden ver como una matriz o un doble array de objetos 
-	         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genérico)*/
+	         * (ya que los campos son o numero o caraceres se especifica que el tipo de datos es un objeto genï¿½rico)*/
 	        Object[][] datosTabla = new Object[ternerasEnfermas.size()][6];
 	        int fila = 0;
 	        

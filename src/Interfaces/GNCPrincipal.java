@@ -13,6 +13,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import excepciones.TerneraEnfermaException;
+
 public class GNCPrincipal extends JFrame {
 	
 	/**
@@ -132,7 +134,7 @@ public class GNCPrincipal extends JFrame {
 	            	centrarVentana(formLogin);
             	}
             	else{
-            		 JOptionPane.showInternalMessageDialog(escritorio, "¡Formulario ya Abierto!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            		 JOptionPane.showInternalMessageDialog(escritorio, "ï¿½Formulario ya Abierto!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             	} 
             }
         });
@@ -253,7 +255,7 @@ public class GNCPrincipal extends JFrame {
 	            	nuevaEnfermedad.toFront();
             	}
             	else{
-            		 JOptionPane.showInternalMessageDialog(escritorio, "¡Formulario ya esta abierto!", "Aviso: Nueva Enfermedad", JOptionPane.INFORMATION_MESSAGE);
+            		 JOptionPane.showInternalMessageDialog(escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Nueva Enfermedad", JOptionPane.INFORMATION_MESSAGE);
             	}            
             }
         });		
@@ -269,6 +271,9 @@ public class GNCPrincipal extends JFrame {
 					} catch (NamingException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+					} catch (TerneraEnfermaException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
             		formEnfermedades.setVisible(true);
 	            	escritorio.add(formEnfermedades);
@@ -276,7 +281,7 @@ public class GNCPrincipal extends JFrame {
 	            	formEnfermedades.toFront();
             	}
             	else{
-            		 JOptionPane.showInternalMessageDialog(escritorio, "¡Formulario ya esta abierto!", "Aviso: Enfermedades", JOptionPane.INFORMATION_MESSAGE);
+            		 JOptionPane.showInternalMessageDialog(escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Enfermedades", JOptionPane.INFORMATION_MESSAGE);
             	}  
             }
         });
@@ -297,7 +302,7 @@ public class GNCPrincipal extends JFrame {
 	            	
             	}
             	else{
-            		 JOptionPane.showInternalMessageDialog(escritorio, "¡Formulario ya esta abierto!", "Aviso: Registro Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
+            		 JOptionPane.showInternalMessageDialog(escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Registro Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
             	}     
             }
         });
@@ -310,14 +315,19 @@ public class GNCPrincipal extends JFrame {
             	/**Abrir ventana interna**/
             	if(formTernerasEnfermas == null || formTernerasEnfermas.isClosed()){
             		
-            		formTernerasEnfermas = new GNCTernerasEnfermas();
+            		try {
+						formTernerasEnfermas = new GNCTernerasEnfermas();
+					} catch (TerneraEnfermaException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
             		formTernerasEnfermas.setVisible(true);
 	            	escritorio.add(formTernerasEnfermas);
 	            	centrarVentana(formTernerasEnfermas);
 	            	formTernerasEnfermas.toFront();
             	}
             	else{
-            		 JOptionPane.showInternalMessageDialog(escritorio, "¡Formulario ya esta abierto!", "Aviso: Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
+            		 JOptionPane.showInternalMessageDialog(escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
             	}     
             }
         });
@@ -330,14 +340,19 @@ public class GNCPrincipal extends JFrame {
             	/**Abrir ventana interna**/
             	if(formInformeTerneras == null || formInformeTerneras.isClosed()){
             		
-            		formInformeTerneras = new GNCInformeDeTernerasEnfermas();
+            		try {
+						formInformeTerneras = new GNCInformeDeTernerasEnfermas();
+					} catch (TerneraEnfermaException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
             		formInformeTerneras.setVisible(true);
 	            	escritorio.add(formInformeTerneras);
 	            	centrarVentana(formInformeTerneras);
 	            	formInformeTerneras.toFront();
             	}
             	else{
-            		 JOptionPane.showInternalMessageDialog(escritorio, "¡Formulario ya esta abierto!", "Aviso: Informe Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
+            		 JOptionPane.showInternalMessageDialog(escritorio, "ï¿½Formulario ya esta abierto!", "Aviso: Informe Terneras Enfermas", JOptionPane.INFORMATION_MESSAGE);
             	}     
             }
         });
